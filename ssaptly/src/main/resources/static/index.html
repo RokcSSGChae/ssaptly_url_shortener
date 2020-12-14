@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>SSAPTLY</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+	<div>
+		<h1>SSAPTLY URL SHORTENER</h1>
+	</div>
+	<div>
+		<form id="urlShortenForm">
+			<input type="text" id="urlInput" name="url" /> 
+			<button type="button" id="submitButton" >제출</button>
+		</form>
+	</div>
+	<div>
+		<input type="text" value="결과" id="result" />
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#submitButton").click(function() {
+				getResult();
+			});
+		});
+		function getResult(){
+			let formData = $("#urlShortenForm").serialize();
+			$("#submitButton").click(function() {
+				$.ajax({
+					method : 'POST',
+					url : '/rest/url/shorten',
+					data : formData,
+					success : function(result) {
+						$("#result").val(result);
+					}
+				});
+			});
+		}
+	</script>
+</body>
+</html>
