@@ -3,41 +3,44 @@
 <head>
 <meta charset="UTF-8">
 <title>SSAPTLY</title>
+<link rel="stylesheet" href="css/index.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="js/shortenUrl.js"></script>
+<script src="js/copyToClipboard.js"></script>
 </head>
 <body>
-	<div>
-		<h1>SSAPTLY URL SHORTENER</h1>
+	<div id="header">
+		<div id="logoBox">
+			<h1>
+				<a href="/"> SSAP.TLY URL SHORTENER </a>
+			</h1>
+		</div>
+		<div id="gnb">
+			<ul>
+				<li class="nav"><a href="/">HOME</a></li>
+				<li class="nav"><a href="/" onclick="noThanks()">DONATE</a></li>
+			</ul>
+		</div>
+		<!--//#logoBox -->
 	</div>
-	<div>
-		<form id="urlShortenForm">
-			<input type="text" id="urlInput" name="url" /> 
-			<button type="button" id="submitButton" >제출</button>
-		</form>
+	<div id="content">
+		<div id="contentBox">
+			<p>Simple is the best</p>
+			<p>Just do it!</p>
+			<div>
+				<form id="urlShortenForm">
+					<input type="text" id="urlInput" name="url"
+						placeholder="SHORTEN YOUR LINK" />
+					<button type="button" id="submitButton">SHORTEN!</button>
+				</form>
+			</div>
+		</div>
+		<div id="resultBox">
+			<input type="text" id="result" placeholder="YOUR RESULT!" readonly />
+			<button type="button" id="copyButton"
+				onclick="copyToClipboard('#result')">COPY!</button>
+		</div>
 	</div>
-	<div>
-		<input type="text" value="결과" id="result" />
-	</div>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$("#submitButton").click(function() {
-				getResult();
-			});
-		});
-		function getResult(){
-			let formData = $("#urlShortenForm").serialize();
-			$("#submitButton").click(function() {
-				$.ajax({
-					method : 'POST',
-					url : '/rest/url/shorten',
-					data : formData,
-					success : function(result) {
-						$("#result").val(result);
-					}
-				});
-			});
-		}
-	</script>
 </body>
 </html>
